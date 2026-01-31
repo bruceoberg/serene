@@ -9,8 +9,12 @@
 {% endblock desc %}
 
 {% block head %}
-{% if config.markdown.highlight_theme == "css" %}
-<link id="hl" rel="stylesheet" type="text/css" href="/hl-{% if config.extra.force_theme == "dark" %}dark{% else %}light{% endif %}.css" />
+{% if config.markdown.highlighting.style == "class" %}
+  {% if config.extra.force_theme == "dark" %}
+    <link id="hl" rel="stylesheet" type="text/css" href="{{ get_url(path='giallo-dark.css') }}" />
+  {% else %}
+    <link id="hl" rel="stylesheet" type="text/css" href="{{ get_url(path='giallo-light.css') }}" />
+  {% endif %}
 {% endif %}
 {% if section.extra.math %}
   {{ macro_math::math_render(style = section.extra.math) }}

@@ -126,40 +126,36 @@ Now the myblog directory may looks like this:
     └── serene/
 ```
 
-## Configuration
+## Favicon
 
-### Favicon
+Create a new directory `img` under `myblog/static`, put favicon related files here, you can use tools like [favicon.io](https://favicon.io/favicon-converter/) to generate those files. If you want to display avatar in home page, also put your avatar picture file `avatar.webp` here, webp format is recommended.
 
-- Create a new directory `img` under `myblog/static`, put favicon related files here, you can use tools like [favicon.io](https://favicon.io/favicon-converter/) to generate those files
+```
+...
+├── static/
+│   └── img/
+│       ├── favicon-16x16.png
+│       ├── favicon-32x32.png
+│       ├── apple-touch-icon.png
+│       └── avatar.webp
+...
+```
 
-- Also put your avatar picture file `avatar.webp` here, webp format is recommended
+## Icon
 
-  ```
-  ...
-  ├── static/
-  │   └── img/
-  │       ├── favicon-16x16.png
-  │       ├── favicon-32x32.png
-  │       ├── apple-touch-icon.png
-  │       └── avatar.webp
-  ...
-  ```
+The default icons are placed in `myblog/themes/serene/static/icon`, the `icon` value in `links` of home section is the file name of the svg file.
 
-### Icon
+To customize, find the svg file you want, modify (in case you don't kown, a svg file is just a plian text file) its width and height to `18`, and the color to `currentColor`:
 
-- Copy `myblog/themes/serene/static/icon` directory to `myblog/static/icon`, the icon value in `links` is the file name of the svg file in it, without the `.svg` suffix
+`... width="18" height="18" ... fill="currentColor" ...`
 
-- Find the svg file of the icon you want, modify (in case you don't kown, svg is just a plian text files) its width and height to 20, and the color to `currentColor`:
+and then put it in `myblog/static/icon`, file in this folder with the same name will override the default one.
 
-  `... width="20" height="20" ... fill="currentColor" ...`
+The default icons mostly came from [Remix Icon](https://remixicon.com/).
 
-- The default icons came from [Remix Icon](https://remixicon.com/)
+## Theme
 
-### Code highlight
-
-- Copy `myblog/themes/serene/highlight_themes` directory to `myblog/highlight_themes`.
-
-- If you set `highlight_theme` in `config.toml` to one of zola's [built-in highlight themes](https://www.getzola.org/documentation/getting-started/configuration/#syntax-highlighting), you will get that theme used in both light and dark mode.
+By default there is theme toggle button to switch between light and dark mode, you can set `force_theme` in `config.toml` to force a specific mode only.
 
 - By default serene use different themes for light/dark modes, configured by `highlight_theme`, `extra_syntaxes_and_themes` and `highlight_themes_css`. The default highlight theme `serene-light` `serene-dark` is a modified version of [Tomorrow](https://github.com/ChrisKempson/Tomorrow-Theme) theme.
 
@@ -391,17 +387,9 @@ Now the myblog directory may looks like this:
   {% end %}
   ```
 
-- If people read your posts via rss reader, these callouts will appear as normal `<blockquote>`
+  ***Update: [github callout/alert syntax](https://github.com/orgs/community/discussions/16925) is supported since zola v0.21 (however it doesn't display icon and title), the callout shortcodes will be deprecated in this theme's next major release***
 
-### Math
-
-- Set `math = true` or `math = "katex"`in the front matter to enable formula rending with [KaTeX](https://katex.org/): `$...$` for inline formula, `$$...$$` for block-level formula.
-
-- Set `math = "typst"` to enable formula rendering with [Typst](https://typst.app/): `$...$` for inline formula, `$ ... $` (insert space at start and end) for block-level formula.
-
-### Mermaid
-
-- Set `mermaid = true` in the front matter to enable [Mermaid](https://github.com/mermaid-js/mermaid) support, and then insert a chart in the following format:
+- Use `mermaid` to add a mermaid chart:
 
   ```md
   {% mermaid() %}
