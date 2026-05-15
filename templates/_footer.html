@@ -1,6 +1,6 @@
 <footer>
   <div class="copyright">
-    {{ config.extra.footer_copyright | trim | markdown | safe }}
+    {{ config.extra.footer_copyright | replace(from="{year}", to=now() | date(format="%Y")) | trim | markdown | safe }}
   </div>
   {% if config.extra.footer_credits %}
   <div class="credits">
